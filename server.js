@@ -28,7 +28,22 @@ app.use(compression({
     }
 }))
 
-mongoose.connect(process.env.DB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true});
+
+
+const connectDB = async () => {
+    console.log("err", process.env.DB_URI)
+    try {
+        const conn = await mongoose.connect(process.env.DB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+      
+          console.log(`MongoDB connected: ${conn.connection.host}`);
+    } catch (err) {
+        console.log("x",err);
+        process.exit(1);
+    }
+}
+
+connectDB();
+
 
 app.use('/login', loginRouter); //login user
 app.use('/users', usersRouter); //all users

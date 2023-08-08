@@ -59,9 +59,9 @@ export const login = async (req,res) => {
         } );
 
     }catch(error){
-        // console.log(error);
-        const errors = handleError(error);
-        res.status(400).json({errors: errors})
+        console.log(error);
+        // const errors = handleError(error);
+        res.status(400).json({errors: error})
     }
   
 };
